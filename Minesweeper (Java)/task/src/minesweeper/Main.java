@@ -8,9 +8,9 @@ public class Main {
         System.out.println("How many mines do you want on the field?");
         var s = new Scanner(System.in);
         var mines = s.nextInt();
-        var game = new GameState(mines);
+        var game = new Game(mines);
         System.out.println(game);
-        while(!game.isFinished) {
+        while (game.state == GameState.ONGOING) {
             String error;
             do {
                 System.out.println("Set/unset mines marks or claim a cell as free (x y command):");
@@ -19,7 +19,7 @@ public class Main {
             } while (error != null);
             System.out.println(game);
         }
-        if(game.isWinner) {
+        if (game.state == GameState.WON) {
             System.out.println("Congratulations! You found all the mines!");
         } else {
             System.out.println("You stepped on a mine and failed!");
